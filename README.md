@@ -87,9 +87,3 @@ La base de datos se genera automáticamente siguiendo el diagrama Entidad-Relaci
 Una vez que el proyecto esté corriendo:
 
 * **Panel de Control (Frontend Web)**: Abre en tu navegador de preferencia **`http://localhost:8080/`**. Desde aquí podrás registrar socios, gestionar contactos de emergencia, crear actividades, inscribir personas y marcar asistencia de manera totalmente visual y fluida.
-* **Documentación Técnica (PDF Explicativo)**: En la raíz del proyecto se encuentra el archivo **`DOCUMENTO_EXPLICATIVO.md`** con la redacción completa y explicativa de cada apartado requerida para la entrega en formato PDF.
-* **Consola de la Base de Datos H2**: Si deseas ver las tablas físicamente, accede a **`http://localhost:8080/h2-console`** e introduce estos datos:
-  * **Driver Class**: `org.h2.Driver`
-  * **JDBC URL**: `jdbc:h2:mem:aspacacorbd`
-  * **User Name**: `sa`
-  * **Password**: `password`
