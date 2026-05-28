@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# PDF generation helpers
+DOCUMENTO_EXPLICATIVO.html
+DOCUMENTO_EXPLICATIVO.pdf
+generate_html.js
+

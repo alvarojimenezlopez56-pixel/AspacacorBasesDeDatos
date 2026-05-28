@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASPACACOR | Gestión de Socios</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="brand-name">
+                    <h2>ASPACACOR</h2>
+                    <span>Gestión Interna</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                    <span>Panel de Control</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="socios">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Socios</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="actividades">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>Actividades</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="inscripciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span>Inscripciones</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-indicator online"></span>
+                    <span>Conectado a H2</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="page-title">
+                    <h1 id="current-tab-title">Panel de Control</h1>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">AD</div>
+                    <div class="user-details">
+                        <h4>Administrador</h4>
+                        <span>Tutor de Prácticas</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Tab -->
+            <section id="dashboard-tab" class="tab-content active">
+                <div class="dashboard-grid">
+                    <!-- Stat Card 1 -->
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="stat-total-socios">0</h3>
+                            <p>Socios Registrados</p>
+                        </div>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="stat-total-actividades">0</h3>
+                            <p>Actividades Activas</p>
+                        </div>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="stat-total-inscripciones">0</h3>
+                            <p>Inscripciones Totales</p>
+                        </div>
+                    </div>
+                    <!-- Stat Card 4 -->
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="stat-asistencia-requerida">0</h3>
+                            <p>Socios con Asistencia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-sections">
+                    <div class="dashboard-table-container card">
+                        <div class="card-header">
+                            <h3>Inscripciones Recientes</h3>
+                            <button class="btn btn-outline btn-sm" onclick="app.switchTab('inscripciones')">Ver todas</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Socio</th>
+                                        <th>Actividad</th>
+                                        <th>Fecha Registro</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                id="recent-inscriptions-body"
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="text-muted text-center py-4">No hay inscripciones registradas.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-side-panel card">
+                        <div class="card-header">
+                            <h3>Acciones Rápidas</h3>
+                        </div>
+                        <div class="quick-actions-list">
+                            <button class="btn btn-primary w-100 mb-3" onclick="app.openNewSocioModal()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 8px"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>
+                                Dar de Alta Socio
+                            </button>
+                            <button class="btn btn-success w-100 mb-3" onclick="app.openNewActividadModal()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 8px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="9" x2="12" y2="17"></line><line x1="8" y1="13" x2="16" y2="13"></line></svg>
+                                Crear Actividad
+                            </button>
+                            <button class="btn btn-info w-100" onclick="app.openNewInscripcionModal()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 8px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
+                                Nueva Inscripción
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Socios Tab -->
+            <section id="socios-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-action-header">
+                        <div class="search-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="socio-search" placeholder="Buscar socio por nombre, apellido o DNI..." oninput="app.filterSocios()">
+                        </div>
+                        <button class="btn btn-primary" onclick="app.openNewSocioModal()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Nuevo Socio
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>DNI</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Teléfono</th>
+                                    <th>F. Nacimiento</th>
+                                    <th>Asistencia Especial</th>
+                                    <th>Contactos Emergencia</th>
+                                    <th class="text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="socios-table-body">
+                                <tr>
+                                    <td colspan="7" class="text-muted text-center py-4">Cargando socios...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actividades Tab -->
+            <section id="actividades-tab" class="tab-content">
+                <div class="card-action-header mb-4">
+                    <h3>Listado de Actividades</h3>
+                    <button class="btn btn-success" onclick="app.openNewActividadModal()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        Nueva Actividad
+                    </button>
+                </div>
+                <div class="actividades-grid" id="actividades-container">
+                    <div class="text-muted text-center py-4 w-100">Cargando actividades...</div>
+                </div>
+            </section>
+
+            <!-- Inscripciones Tab -->
+            <section id="inscripciones-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-action-header">
+                        <h3>Registros de Inscripción</h3>
+                        <button class="btn btn-info" onclick="app.openNewInscripcionModal()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Nueva Inscripción
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Socio</th>
+                                    <th>Actividad</th>
+                                    <th>Fecha Registro</th>
+                                    <th>Asistencia Confirmada</th>
+                                    <th class="text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inscripciones-table-body">
+                                <tr>
+                                    <td colspan="6" class="text-muted text-center py-4">Cargando inscripciones...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL SOCIO (Alta y Edición) -->
+    <div id="socio-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3 id="socio-modal-title">Dar de Alta Socio</h3>
+                <span class="close-btn" onclick="app.closeSocioModal()">&times;</span>
+            </div>
+            <form id="socio-form" onsubmit="app.saveSocio(event)">
+                <input type="hidden" id="socio-id">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="socio-nombre">Nombre *</label>
+                        <input type="text" id="socio-nombre" required placeholder="Ej. Juan">
+                    </div>
+                    <div class="form-group">
+                        <label for="socio-apellidos">Apellidos *</label>
+                        <input type="text" id="socio-apellidos" required placeholder="Ej. Pérez Gómez">
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="socio-dni">DNI *</label>
+                        <input type="text" id="socio-dni" required placeholder="Ej. 12345678A">
+                    </div>
+                    <div class="form-group">
+                        <label for="socio-telefono">Teléfono</label>
+                        <input type="tel" id="socio-telefono" placeholder="Ej. 600123456">
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="socio-fecha-nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" id="socio-fecha-nacimiento">
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label class="switch-container">
+                            <input type="checkbox" id="socio-asistencia">
+                            <span class="slider"></span>
+                        </label>
+                        <label for="socio-asistencia" class="checkbox-label">¿Necesita asistencia especial?</label>
+                    </div>
+                </div>
+
+                <!-- Apartado Contactos de Emergencia -->
+                <div class="emergency-section mt-4">
+                    <div class="emergency-header">
+                        <h4>Contactos de Emergencia</h4>
+                        <button type="button" class="btn btn-outline btn-xs" onclick="app.addEmergencyContactRow()">+ Añadir</button>
+                    </div>
+                    <div id="emergency-contacts-container" class="emergency-list">
+                        <!-- Filas de contacto dinámicas -->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="app.closeSocioModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL ACTIVIDAD (Alta y Edición) -->
+    <div id="actividad-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3 id="actividad-modal-title">Crear Actividad</h3>
+                <span class="close-btn" onclick="app.closeActividadModal()">&times;</span>
+            </div>
+            <form id="actividad-form" onsubmit="app.saveActividad(event)">
+                <input type="hidden" id="actividad-id">
+                <div class="form-group">
+                    <label for="actividad-titulo">Título de la Actividad *</label>
+                    <input type="text" id="actividad-titulo" required placeholder="Ej. Taller de Memoria">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="actividad-fecha-hora">Fecha y Hora *</label>
+                        <input type="datetime-local" id="actividad-fecha-hora" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="actividad-plazas">Plazas Máximas *</label>
+                        <input type="number" id="actividad-plazas" required min="1" placeholder="Ej. 15">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="actividad-lugar">Lugar *</label>
+                    <input type="text" id="actividad-lugar" required placeholder="Ej. Aula 2, Centro Social">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="app.closeActividadModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL INSCRIPCION (Alta) -->
+    <div id="inscripcion-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3>Nueva Inscripción</h3>
+                <span class="close-btn" onclick="app.closeInscripcionModal()">&times;</span>
+            </div>
+            <form id="inscripcion-form" onsubmit="app.saveInscripcion(event)">
+                <div class="form-group">
+                    <label for="inscripcion-socio">Seleccionar Socio *</label>
+                    <select id="inscripcion-socio" required>
+                        <option value="">Cargando socios...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inscripcion-actividad">Seleccionar Actividad *</label>
+                    <select id="inscripcion-actividad" required>
+                        <option value="">Cargando actividades...</option>
+                    </select>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="switch-container">
+                        <input type="checkbox" id="inscripcion-asistencia">
+                        <span class="slider"></span>
+                    </label>
+                    <label for="inscripcion-asistencia" class="checkbox-label">Asistencia confirmada</label>
+                </div>
+                <div id="inscripcion-error" class="error-banner mb-3" style="display:none;"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="app.closeInscripcionModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-info">Inscribir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS Aplicación -->
+    <script src="app.js"></script>
+</body>
+</html>

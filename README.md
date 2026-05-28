@@ -1,28 +1,95 @@
-# Gestión de Socios - ASPACACOR
+# ASPACACOR - Sistema de Gestión de Socios, Actividades e Inscripciones
 
-Este proyecto es una aplicación backend desarrollada con **Spring Boot** para la gestión automatizada de los registros de la Asociación de Pacientes Cardiacos de Córdoba (**ASPACACOR**). La API permite realizar todas las operaciones CRUD (Alta, Visualización, Modificación y Eliminación) sobre la entidad de Socios de forma eficiente y segura.
-
----
-
-## 🛠️ Decisiones de Diseño y Arquitectura
-
-Para el desarrollo de la actividad formativa se han tomado las siguientes decisiones técnicas con el fin de garantizar la portabilidad y agilidad en la evaluación:
-
-1. **Persistencia en Memoria (H2 Database):** Debido a las restricciones locales de red e indexación del motor externo SQL Server en el entorno de desarrollo, se ha optado por implementar una base de datos **H2 en memoria**. Esto garantiza que el proyecto sea **100% portable**: el evaluador puede clonar y arrancar la aplicación directamente sin necesidad de configurar instancias locales de bases de datos ni dependencias de red externas.
-2. **Estructura de Datos Restringida:** Los campos JSON se encuentran estrictamente ordenados mediante la anotación `@JsonPropertyOrder` para cumplir con los requisitos de visualización clara expuestos en la actividad.
-3. **Gestión de Ciclo de Vida:** Al trabajar en memoria RAM, el ciclo de vida de los datos está ligado al del servidor. Cada arranque inicializa la estructura de tablas de forma limpia y automática gracias a las directivas de Hibernate.
+Este proyecto es una aplicación web y API REST desarrollada con **Spring Boot** para automatizar el control y gestión interna de la Asociación de Pacientes Cardiacos de Córdoba (**ASPACACOR**). La aplicación permite administrar de forma integral los socios, sus contactos de emergencia en caso de incidencias médicas, las actividades programadas y el registro de inscripciones con control de aforo y asistencia.
 
 ---
 
-## 🚀 Requisitos e Instalación
+## 📋 Características del Proyecto
+
+El sistema está diseñado siguiendo una arquitectura limpia y desacoplada, cumpliendo los siguientes objetivos técnicos:
+* **Modelo E-R Completo**: Implementación de las 4 entidades del diagrama (Socio, Contacto de Emergencia, Actividad e Inscripción) con integridad referencial completa.
+* **Control de Negocio**: Validación automática de plazas libres antes de procesar una inscripción y prevención de duplicados.
+* **Persistencia Integrada (H2)**: Base de datos SQL en memoria autoconfigurable que arranca y crea las tablas al iniciar la aplicación (100% portable, sin dependencias externas).
+* **Interfaz de Usuario (SPA)**: Dashboard web premium oscuro (*glassmorphic*) integrado directamente en el servidor para realizar todo el CRUD visualmente y ver estadísticas.
+
+---
+
+## 🗄️ Modelo de Datos y Restricciones
+
+La base de datos se genera automáticamente siguiendo el diagrama Entidad-Relación:
+
+1. **Socio (`Socio.java`)**:
+   * `idSocio` (Long, PK, Auto-incremental)
+   * `dni` (String, Obligatorio)
+   * `nombre` / `apellidos` (String, Obligatorios)
+   * `telefono` (String)
+   * `fechaNacimiento` (LocalDate)
+   * `necesitaAsistencia` (Boolean)
+2. **Contacto de Emergencia (`ContactoEmergencia.java`)**:
+   * `idContacto` (Long, PK, Auto-incremental)
+   * `nombreCompleto` (String, Obligatorio)
+   * `telefono` (String, Obligatorio)
+   * `parentesco` (String, Obligatorio)
+   * `id_socio` (FK apuntando a Socio, Relación Many-to-One, Cascada completa)
+3. **Actividad (`Actividad.java`)**:
+   * `idActividad` (Long, PK, Auto-incremental)
+   * `titulo` (String, Obligatorio)
+   * `fechaHora` (LocalDateTime, Obligatorio)
+   * `lugar` (String, Obligatorio)
+   * `plazasMaximas` (Integer, Obligatorio)
+4. **Inscripción (`Inscripcion.java`)**:
+   * `idInscripcion` (Long, PK, Auto-incremental)
+   * `id_socio` (FK apuntando a Socio, Relación Many-to-One)
+   * `id_actividad` (FK apuntando a Actividad, Relación Many-to-One)
+   * `asistenciaConfirmada` (Boolean)
+   * `fechaRegistro` (LocalDateTime)
+
+---
+
+## 🚀 Instrucciones de Despliegue y Arranque
 
 ### Prerrequisitos
-* **Java 17** o superior instalado.
-* **Maven** (o uso del wrapper incluido `mvnw`).
+* **Java 17** o superior (la aplicación es compatible hasta Java 26).
+* **Maven** (no requiere instalación; el proyecto incluye los scripts de envoltura `mvnw` y `mvnw.cmd`).
 
-### Pasos para arrancar el proyecto de forma local:
-1. Clonar el repositorio o descargar el proyecto en una ruta local.
-2. Abrir la terminal en el directorio raíz del proyecto (donde se aloja este archivo `README.md`).
-3. Limpiar la caché de compilación ejecuntando:
-   ```bash
-   .\mvnw.cmd clean compile
+### Pasos para iniciar la aplicación:
+
+1. Abre una terminal (PowerShell o CMD en Windows, Terminal en macOS/Linux) en la carpeta raíz del proyecto.
+2. Compila el proyecto ejecutando el comando correspondiente a tu sistema operativo:
+   * **En Windows (PowerShell):**
+     ```powershell
+     .\mvnw clean compile
+     ```
+   * **En Windows (CMD):**
+     ```cmd
+     mvnw clean compile
+     ```
+   * **En macOS/Linux:**
+     ```bash
+     chmod +x mvnw
+     ./mvnw clean compile
+     ```
+3. Inicia la aplicación Spring Boot con:
+   * **En Windows (PowerShell/CMD):**
+     ```powershell
+     .\mvnw spring-boot:run
+     ```
+   * **En macOS/Linux:**
+     ```bash
+     ./mvnw spring-boot:run
+     ```
+4. El servidor estará escuchando en el puerto `8080`.
+
+---
+
+## 💻 Acceso e Interacción
+
+Una vez que el proyecto esté corriendo:
+
+* **Panel de Control (Frontend Web)**: Abre en tu navegador de preferencia **`http://localhost:8080/`**. Desde aquí podrás registrar socios, gestionar contactos de emergencia, crear actividades, inscribir personas y marcar asistencia de manera totalmente visual y fluida.
+* **Documentación Técnica (PDF Explicativo)**: En la raíz del proyecto se encuentra el archivo **`DOCUMENTO_EXPLICATIVO.md`** con la redacción completa y explicativa de cada apartado requerida para la entrega en formato PDF.
+* **Consola de la Base de Datos H2**: Si deseas ver las tablas físicamente, accede a **`http://localhost:8080/h2-console`** e introduce estos datos:
+  * **Driver Class**: `org.h2.Driver`
+  * **JDBC URL**: `jdbc:h2:mem:aspacacorbd`
+  * **User Name**: `sa`
+  * **Password**: `password`
